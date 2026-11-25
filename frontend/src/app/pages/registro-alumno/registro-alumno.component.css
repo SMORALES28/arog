@@ -1,0 +1,65 @@
+/* src/app/pages/registro-alumno/registro-alumno.component.css */
+
+.page-container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.page-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.form-card {
+  padding: 2rem;
+}
+
+/* Filas de dos columnas (responsive) */
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+@media (max-width: 640px) {
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Botones en línea que no ocupan todo el ancho */
+.btn-inline {
+  width: auto;
+  min-width: 140px;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--color-border);
+}
+
+/* Mensaje de éxito en verde */
+.exito-message {
+  color: var(--color-secondary);
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-top: 0.5rem;
+  padding: 0.75rem;
+  background-color: #ecfdf5;
+  border-radius: var(--radius);
+}
