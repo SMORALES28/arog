@@ -1,0 +1,105 @@
+/* src/app/pages/generar-qr/generar-qr.component.css */
+
+.page-container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.page-header {
+  margin-bottom: 1.5rem;
+}
+
+.back-link {
+  display: inline-block;
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  margin-bottom: 0.5rem;
+}
+.back-link:hover { color: var(--color-primary); text-decoration: none; }
+
+.page-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+/* Layout: dos columnas en desktop, una en móvil */
+.qr-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.section-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 1.25rem;
+}
+
+.form-actions-vertical {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+/* Tarjeta de vista previa del QR */
+.qr-preview-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 380px;
+  text-align: center;
+}
+
+.qr-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 2rem 0;
+}
+
+.placeholder-icon {
+  font-size: 4rem;
+  color: var(--color-border);
+  line-height: 1;
+}
+
+/* Contenedor del QR renderizado */
+.qr-canvas-wrapper {
+  padding: 1rem;
+  background-color: white;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+/* La matrícula debajo del QR */
+.qr-matricula {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+}
+.qr-matricula code {
+  font-family: 'Courier New', monospace;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-text);
+  background-color: #f3f4f6;
+  padding: 0.25rem 0.75rem;
+  border-radius: 6px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .qr-layout {
+    grid-template-columns: 1fr;
+  }
+  .qr-preview-card {
+    min-height: 300px;
+  }
+}

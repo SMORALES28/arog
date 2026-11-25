@@ -1,0 +1,84 @@
+<!-- src/app/pages/generar-qr/generar-qr.component.html -->
+<div class="page-container">
+
+  <!-- ======= Encabezado ======= -->
+  <header class="page-header">
+    <div>
+      <a routerLink="/dashboard" class="back-link">← Volver al panel</a>
+      <h1 class="page-title">Generar código QR</h1>
+      <p class="text-muted">
+        Ingresa la matrícula del alumno para generar su código QR de identificación.
+      </p>
+    </div>
+  </header>
+
+  <div class="qr-layout">
+
+    <!-- ======= Formulario ======= -->
+    <div class="card">
+      <h2 class="section-title">Datos del alumno</h2>
+
+      <form (ngSubmit)="generar()" #qrForm="ngForm" novalidate>
+        <div class="form-group">
+          <label class="form-label" for="matricula">Matrícula *</label>
+          <input
+            id="matricula"
+            type="text"
+            class="form-input"
+            name="matricula"
+            [(ngModel)]="matricula"
+            placeholder="Ej. 2024001"
+            required
+            autocomplete="off"
+          />
+        </div>
+
+        <div class="form-actions-vertical">
+          <button type="submit" class="btn btn-primary" [disabled]="cargando || !matricula.trim()">
+            {{ cargando ? 'Generando…' : 'Generar QR' }}
+          </button>
+          <button type="button" class="btn btn-secondary" (click)="limpiar()" [disabled]="!matricula && !matriculaConfirmada">
+            Limpiar
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- ======= Vista previa del QR ======= -->
+    <div class="card qr-preview-card">
+
+      <!-- Sin QR generado -->
+      <div class="qr-placeholder" *ngIf="!matriculaConfirmada && !cargando">
+        <div class="placeholder-icon">▦</div>
+        <p class="text-muted">El código QR aparecerá aquí</p>
+      </div>
+
+      <!-- Estado de carga -->
+      <div class="qr-placeholder" *ngIf="cargando">
+        <p class="text-muted">Generando código…</p>
+      </div>
+
+      <!-- QR generado -->
+      <ng-container *ngIf="matriculaConfirmada && !cargando">
+        <div class="qr-canvas-wrapper">
+          <qrcode
+            [qrdata]="matriculaConfirmada"
+            [width]="qrAncho"
+            [errorCorrectionLevel]="qrNivelCorreccion"
+            [margin]="2"
+          ></qrcode>
+        </div>
+
+        <p class="qr-matricula">
+          <code>{{ matriculaConfirmada }}</code>
+        </p>
+
+        <button type="button" class="btn btn-secondary mt-2" (click)="descargarQr()">
+          ⬇ Descargar PNG
+        </button>
+      </ng-container>
+
+    </div>
+  </div>
+
+</div>
