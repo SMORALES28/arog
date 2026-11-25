@@ -1,0 +1,91 @@
+<!-- src/app/pages/detalle-alumno/detalle-alumno.component.html -->
+<div class="page-container">
+
+  <!-- ======= Encabezado ======= -->
+  <header class="page-header">
+    <a routerLink="/dashboard" class="back-link">← Volver al panel</a>
+
+    <div class="alumno-header" *ngIf="alumno">
+      <div class="avatar">{{ alumno.nombre.charAt(0) }}{{ alumno.apellidoPaterno.charAt(0) }}</div>
+      <div>
+        <h1 class="page-title">
+          {{ alumno.nombre }} {{ alumno.apellidoPaterno }} {{ alumno.apellidoMaterno }}
+        </h1>
+        <p class="text-muted">
+          <code class="matricula">{{ alumno.matricula }}</code>
+          · Grupo {{ alumno.grupo }} · {{ alumno.correo }}
+        </p>
+      </div>
+    </div>
+  </header>
+
+  <!-- ======= Estado de carga ======= -->
+  <div class="loading" *ngIf="cargando">
+    <p class="text-muted">Cargando información del alumno…</p>
+  </div>
+
+  <ng-container *ngIf="!cargando && alumno">
+
+    <!-- ======= Resumen de estadísticas ======= -->
+    <div class="stats-grid">
+      <div class="card stat-card">
+        <span class="stat-value">{{ totalAsistencias }}</span>
+        <span class="stat-label">Asistencias</span>
+      </div>
+      <div class="card stat-card">
+        <span class="stat-value stat-danger">{{ totalFaltas }}</span>
+        <span class="stat-label">Faltas</span>
+      </div>
+      <div class="card stat-card">
+        <span class="stat-value stat-success">{{ porcentaje }}%</span>
+        <span class="stat-label">Asistencia del mes</span>
+      </div>
+    </div>
+
+    <!-- ======= Calendario ======= -->
+    <div class="card calendario-card">
+
+      <!-- Navegación entre meses -->
+      <div class="calendario-header">
+        <button type="button" class="nav-btn" (click)="mesAnterior()" aria-label="Mes anterior">‹</button>
+        <h2 class="calendario-titulo">{{ tituloMes }}</h2>
+        <button type="button" class="nav-btn" (click)="mesSiguiente()" aria-label="Mes siguiente">›</button>
+      </div>
+
+      <!-- Días de la semana -->
+      <div class="calendario-semana">
+        <div class="dia-semana" *ngFor="let d of diasSemana">{{ d }}</div>
+      </div>
+
+      <!-- Días del mes -->
+      <div class="calendario-grid">
+        <div
+          *ngFor="let dia of diasCalendario"
+          class="dia-celda"
+          [class.dia-vacio]="!dia.fecha"
+          [class.dia-asistio]="dia.asistio"
+          [class.dia-hoy]="dia.esHoy"
+          [class.dia-fin-semana]="dia.esFinDeSemana"
+        >
+          <span class="dia-numero" *ngIf="dia.dia">{{ dia.dia }}</span>
+          <span class="dia-marca" *ngIf="dia.asistio">✓</span>
+        </div>
+      </div>
+
+      <!-- Leyenda -->
+      <div class="leyenda">
+        <span class="leyenda-item">
+          <span class="leyenda-color leyenda-asistio"></span> Asistió
+        </span>
+        <span class="leyenda-item">
+          <span class="leyenda-color leyenda-falta"></span> Falta / Sin registro
+        </span>
+        <span class="leyenda-item">
+          <span class="leyenda-color leyenda-hoy"></span> Hoy
+        </span>
+      </div>
+    </div>
+
+  </ng-container>
+
+</div>
