@@ -1,0 +1,73 @@
+<!-- src/app/pages/detalle-grupo/detalle-grupo.component.html -->
+<div class="page-container">
+
+  <!-- ======= Encabezado ======= -->
+  <header class="page-header">
+    <div>
+      <a routerLink="/dashboard" class="back-link">← Volver al panel</a>
+      <h1 class="page-title">
+        Grupo {{ grupoNombre }}
+        <span class="badge" [class.badge-matutino]="grupoTurno === 'Matutino'"
+              [class.badge-vespertino]="grupoTurno === 'Vespertino'">
+          {{ grupoTurno }}
+        </span>
+      </h1>
+      <p class="text-muted">{{ alumnos.length }} alumnos registrados</p>
+    </div>
+  </header>
+
+  <!-- ======= Barra de búsqueda ======= -->
+  <div class="toolbar">
+    <input
+      type="search"
+      class="form-input search-input"
+      placeholder="Buscar por nombre o matrícula…"
+      [(ngModel)]="filtro"
+      name="filtro"
+    />
+  </div>
+
+  <!-- ======= Estado de carga ======= -->
+  <div class="loading" *ngIf="cargando">
+    <p class="text-muted">Cargando alumnos…</p>
+  </div>
+
+  <!-- ======= Tabla de alumnos ======= -->
+  <div class="card table-card" *ngIf="!cargando">
+    <table class="tabla">
+      <thead>
+      <tr>
+        <th>Alumno</th>
+        <th>Matrícula</th>
+        <th>Correo</th>
+        <th class="text-center">Asistencias del mes</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let alumno of alumnosFiltrados"
+          [routerLink]="['/alumno', alumno.id]"
+          class="fila-clicable">
+        <td>
+          <div class="alumno-nombre">
+            {{ alumno.nombre }} {{ alumno.apellidoPaterno }}
+            <span class="text-muted">{{ alumno.apellidoMaterno }}</span>
+          </div>
+        </td>
+        <td><code class="matricula">{{ alumno.matricula }}</code></td>
+        <td class="text-muted">{{ alumno.correo }}</td>
+        <td class="text-center">
+          <span class="asistencia-badge">{{ alumno.asistenciasMes }}</span>
+        </td>
+      </tr>
+
+      <!-- Estado vacío -->
+      <tr *ngIf="alumnosFiltrados.length === 0">
+        <td colspan="4" class="text-center text-muted empty-row">
+          No se encontraron alumnos que coincidan con el filtro.
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
