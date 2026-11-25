@@ -1,0 +1,78 @@
+<!-- src/app/pages/escanear-qr/escanear-qr.component.html -->
+<div class="page-container">
+
+  <!-- ======= Encabezado ======= -->
+  <header class="page-header">
+    <div>
+      <a routerLink="/dashboard" class="back-link">← Volver al panel</a>
+      <h1 class="page-title">Escanear código QR</h1>
+      <p class="text-muted">
+        Apunta la cámara al código QR del alumno para registrar su asistencia.
+      </p>
+    </div>
+  </header>
+
+  <div class="scanner-layout">
+
+    <!-- ======= Área de la cámara ======= -->
+    <div class="card scanner-card">
+
+      <!-- Mensaje de error crítico -->
+      <div class="error-banner" *ngIf="mensajeError">
+        {{ mensajeError }}
+      </div>
+
+      <!-- Escáner (se oculta cuando hay resultado exitoso) -->
+      <div class="scanner-wrapper" [class.oculto]="escaneoExitoso">
+        <angular-html-qrcode
+          [types]="formatosSoportados"
+          [fps]="10"
+          [aspectRatio]="1.333334"
+          [disableFlip]="false"
+          [supportCameraOrFile]="'camera'"
+          [qrbox]="{ width: 250, height: 250 }"
+          (onSuccess)="handleScanSuccess($event)"
+          (onError)="handleScanError($event)">
+        </angular-html-qrcode>
+      </div>
+
+      <!-- Resultado exitoso -->
+      <div class="resultado-exitoso" *ngIf="escaneoExitoso">
+        <div class="exito-icono">✓</div>
+        <h2 class="resultado-titulo">QR leído correctamente</h2>
+        <p class="text-muted">Matrícula escaneada:</p>
+        <p class="matricula-resultado">
+          <code>{{ matriculaEscaneada }}</code>
+        </p>
+
+        <div class="resultado-acciones">
+          <button type="button" class="btn btn-primary" (click)="reanudarEscaneo()">
+            Escanear otro QR
+          </button>
+        </div>
+
+        <!-- TODO: cuando exista backend, aquí irá el botón "Registrar asistencia" -->
+      </div>
+
+    </div>
+
+    <!-- ======= Panel de instrucciones ======= -->
+    <div class="card instrucciones-card">
+      <h2 class="section-title">Instrucciones</h2>
+      <ol class="instrucciones-lista">
+        <li>Permite el acceso a la cámara cuando el navegador lo solicite.</li>
+        <li>Apunta la cámara hacia el código QR del alumno.</li>
+        <li>Mantén el código dentro del recuadro hasta que se detecte.</li>
+        <li>La matrícula aparecerá en pantalla al leerlo correctamente.</li>
+      </ol>
+
+      <div class="nota-importante">
+        <strong>Nota:</strong> La cámara solo funciona en entornos seguros
+        (<code>https://</code> o <code>localhost</code>). Si estás en otro
+        dispositivo de la red local, necesitarás configurar HTTPS.
+      </div>
+    </div>
+
+  </div>
+
+</div>

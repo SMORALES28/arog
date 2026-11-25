@@ -1,0 +1,163 @@
+/* src/app/pages/escanear-qr/escanear-qr.component.css */
+
+.page-container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.page-header {
+  margin-bottom: 1.5rem;
+}
+
+.back-link {
+  display: inline-block;
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  margin-bottom: 0.5rem;
+}
+.back-link:hover { color: var(--color-primary); text-decoration: none; }
+
+.page-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+/* Layout de dos columnas */
+.scanner-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+/* Tarjeta del escáner */
+.scanner-card {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 400px;
+}
+
+.scanner-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.scanner-wrapper.oculto {
+  display: none;
+}
+
+/* El componente de la librería inyecta su propio DOM; forzamos el ancho */
+.scanner-wrapper ::ng-deep #reader {
+  width: 100% !important;
+  border: none !important;
+}
+
+/* Banner de error */
+.error-banner {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background-color: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: var(--radius);
+  color: var(--color-danger);
+  font-size: 0.875rem;
+  margin-bottom: 1rem;
+}
+
+/* Resultado exitoso */
+.resultado-exitoso {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+.exito-icono {
+  width: 64px;
+  height: 64px;
+  margin-bottom: 1rem;
+  border-radius: 50%;
+  background-color: #d1fae5;
+  color: var(--color-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.resultado-titulo {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.matricula-resultado {
+  margin: 0.75rem 0 1.5rem;
+}
+.matricula-resultado code {
+  font-family: 'Courier New', monospace;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-text);
+  background-color: #f3f4f6;
+  padding: 0.5rem 1.25rem;
+  border-radius: 8px;
+}
+
+.resultado-acciones {
+  display: flex;
+  gap: 0.75rem;
+}
+
+/* Panel de instrucciones */
+.instrucciones-card {
+  padding: 1.5rem;
+}
+
+.section-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.instrucciones-lista {
+  padding-left: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.instrucciones-lista li {
+  margin-bottom: 0.625rem;
+  font-size: 0.9375rem;
+  color: var(--color-text);
+}
+
+.nota-importante {
+  padding: 0.875rem 1rem;
+  background-color: #fffbeb;
+  border-left: 4px solid #f59e0b;
+  border-radius: var(--radius);
+  font-size: 0.8125rem;
+  color: #92400e;
+}
+.nota-importante code {
+  font-family: 'Courier New', monospace;
+  background-color: rgba(0,0,0,0.05);
+  padding: 0.125rem 0.375rem;
+  border-radius: 4px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .scanner-layout {
+    grid-template-columns: 1fr;
+  }
+  .scanner-card {
+    min-height: 320px;
+  }
+}
